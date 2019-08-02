@@ -54,7 +54,7 @@ public class dsm_regularJob extends Configured implements Tool {
         job.setOutputValueClass(Text.class);
 
         job.setNumReduceTasks(100);
-          
+
         return job.waitForCompletion(true)?0:1;
     }
 
