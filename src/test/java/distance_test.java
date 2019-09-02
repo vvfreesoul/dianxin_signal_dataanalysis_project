@@ -40,15 +40,18 @@ public class distance_test {
             intddouble_mapper.put(i++,num);
         }
 
-        double lo1 = intddouble_mapper.get(1)[0];
-        double la1 = intddouble_mapper.get(1)[1];
-        double lo2 = intddouble_mapper.get(2)[0];
-        double la2 = intddouble_mapper.get(2)[1];
+        int base1 = 4867;
+        int base2 = 5330;
+
+        double lo1 = intddouble_mapper.get(base1)[0];
+        double la1 = intddouble_mapper.get(base1)[1];
+        double lo2 = intddouble_mapper.get(base2)[0];
+        double la2 = intddouble_mapper.get(base2)[1];
         double d = Distance(lo1,la1,lo2,la2);
         System.out.println(d);
 
-        String a = "b";
-        String b = "a";
+        String a = "3";
+        String b = "2";
         System.out.println(a.compareTo(b));
 
     }

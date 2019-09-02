@@ -21,7 +21,7 @@ public class DBscanReducer extends Reducer<IntWritable,user_model, NullWritable,
 
     //设定阈值，距离阈值与时间阈值共同组成时空Eps邻域
     int radius = 500;   //距离阈值
-    int minT  = 60;         //时间阈值
+    int minT  = 300;         //时间阈值
     int MinPts = 25;      //核心对象邻居数
     private static HashMap<Integer,Double[]> intdouble_mapper;
     ArrayList<user_model> points = new ArrayList<user_model>();
@@ -81,7 +81,6 @@ public class DBscanReducer extends Reducer<IntWritable,user_model, NullWritable,
             int cluster = 1;
             int idx = 0;
             while (idx < size) { //遍历该用户所有轨迹点
-                System.out.println(idx);
                     //System.out.println("不属于前一类"+idx);
                     user_model p = points.get(idx++);
                     //System.out.println("遍历所有集合点："+idx);
@@ -127,7 +126,7 @@ public class DBscanReducer extends Reducer<IntWritable,user_model, NullWritable,
                                     if (pointadjacent.isNoised()) {
                                         pointadjacent.setNoised(false);
                                     }
-                                    String str = pointadjacent.toStringCluster();
+                                    String str = pointadjacent.toStringCluster_date();
                                     //System.out.println(str);
                                     context.write(NullWritable.get(), new Text(str));
                                 }

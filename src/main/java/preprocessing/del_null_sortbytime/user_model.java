@@ -1,10 +1,14 @@
 package preprocessing.del_null_sortbytime;
 
 import org.apache.hadoop.io.WritableComparable;
+import org.apache.http.util.TextUtils;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class user_model implements WritableComparable<user_model> {
     private long utc_ms;
@@ -15,6 +19,7 @@ public class user_model implements WritableComparable<user_model> {
     private int cluster;
     private boolean isVisit;
     private boolean isNoised;
+    private String new_utc_ms;
 
     public user_model() {
     }
@@ -116,6 +121,21 @@ public class user_model implements WritableComparable<user_model> {
     public String toStringCluster(){
         return msisdn+","+utc_ms+","+base_station+","+cluster;
     }
+
+    public String toStringCluster_date(){
+        new_utc_ms = timeTransform(utc_ms,"yyyy-MM-dd HH:mm:ss");
+        return msisdn+","+new_utc_ms+","+base_station+","+cluster;
+    }
+
+    public String timeTransform(long utc,String formats ){
+        if(TextUtils.isEmpty(formats)){
+            formats = "yyyy-MM-dd HH:mm:ss";
+        }
+        String date_string = new SimpleDateFormat(formats, Locale.CHINA).format(new Date(utc));
+        return date_string;
+    }
+
+
 
     //重写根据经纬度计算距离
     public double getDistance(user_model o) {

@@ -18,8 +18,8 @@ import java.util.Collections;
 import java.util.HashMap;
 
 public class regularReducer extends Reducer<IntWritable,user_model, NullWritable, Text> {
-    final double CLUSTER_RADIUS = 1000;         //聚类半径（单位m）
-    final long CLUSTER_TIMEINTERVAL = 120;    //聚类时间（单位秒）
+    final double CLUSTER_RADIUS = 500;         //聚类半径（单位m）
+    final long CLUSTER_TIMEINTERVAL = 900;    //聚类时间（单位秒）
 
     user_model ti0,ti1;
     long start_time,end_time,time_interval,t=0,end;

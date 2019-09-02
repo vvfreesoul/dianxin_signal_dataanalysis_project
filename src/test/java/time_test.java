@@ -22,7 +22,7 @@ public class time_test {
     public static String date2TimeStamp(String date_str,String format){
         try {
             SimpleDateFormat sdf = new SimpleDateFormat(format);
-            return String.valueOf(sdf.parse(date_str).getTime()/1000);
+            return String.valueOf(sdf.parse(date_str).getTime());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -63,22 +63,24 @@ public class time_test {
     }
 
     public static void main(String[] args) throws ParseException {
-        String timeStamp = timeStamp();
-        System.out.println("timeStamp="+timeStamp); //运行输出:timeStamp=1470278082
-        System.out.println(System.currentTimeMillis());//运行输出:1470278082980
-        //该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数
+//        String timeStamp = timeStamp();
+//        System.out.println("timeStamp="+timeStamp); //运行输出:timeStamp=1470278082
+//        System.out.println(System.currentTimeMillis());//运行输出:1470278082980
+//        //该方法的作用是返回当前的计算机时间，时间的表达格式为当前计算机时间和GMT时间(格林威治时间)1970年1月1号0时0分0秒所差的毫秒数
+////
+//        String date = timeStamp2Date(timeStamp, "yyyy-MM-dd HH:mm:ss");
+//        System.out.println("date="+date);//运行输出:date=2016-08-04 10:34:42
 
-        String date = timeStamp2Date(timeStamp, "yyyy-MM-dd HH:mm:ss");
-        System.out.println("date="+date);//运行输出:date=2016-08-04 10:34:42
 
+        String date = "2019-03-06 00:20:18";
         String timeStamp2 = date2TimeStamp(date, "yyyy-MM-dd HH:mm:ss");
         System.out.println(timeStamp2);  //运行输出:1470278082
 
-        String oidd = "2019-03-02 00:42:28";
-        String lte = "1551691665040";
-        long t = Long.valueOf(ms_stampToDate(lte));
-
-        System.out.println(t);
+//        String oidd = "2019-03-02 00:42:28";
+//        String lte = "1551691665040";
+//        long t = Long.valueOf(ms_stampToDate(lte));
+//
+//        System.out.println(t);
 
     }
 }

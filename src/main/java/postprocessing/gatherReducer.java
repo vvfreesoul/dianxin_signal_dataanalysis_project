@@ -9,8 +9,10 @@ import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Reducer;
+import org.apache.http.util.TextUtils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class gatherReducer extends Reducer<IntWritable, Text, NullWritable,Text> {
@@ -18,6 +20,18 @@ public class gatherReducer extends Reducer<IntWritable, Text, NullWritable,Text>
     int cluster,mycluster,max;
 
     Map<String,Integer> map = new HashMap<String, Integer>();
+
+    public String timeTransform(long utc ){
+        String formats = "yyyy-MM-dd HH:mm:ss";
+        if(TextUtils.isEmpty(formats)){
+            formats = "yyyy-MM-dd HH:mm:ss";
+        }
+        String date_string = new SimpleDateFormat(formats, Locale.CHINA).format(new Date(utc));
+        return date_string;
+    }
+
+
+
 
     @Override
     protected void reduce(IntWritable key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
@@ -73,7 +87,7 @@ public class gatherReducer extends Reducer<IntWritable, Text, NullWritable,Text>
                         max_key = s;
                     }
                 }
-                context.write(NullWritable.get(), new Text(keygen + "," + cluster + "," + max_key + "," + start_time + "," + end_time));
+                context.write(NullWritable.get(), new Text(keygen + "," + cluster + "," + max_key + "," + timeTransform(Long.valueOf(start_time)) + "," + timeTransform(Long.valueOf(end_time))));
                 map.clear();
                 start_time = utc_ms;
                 cluster = mycluster;
@@ -88,7 +102,7 @@ public class gatherReducer extends Reducer<IntWritable, Text, NullWritable,Text>
             }
         }
 
-        context.write(NullWritable.get(), new Text(keygen + "," + cluster + "," + max_key + "," + start_time + "," + end_time));
+        context.write(NullWritable.get(), new Text(keygen + "," + cluster + "," + max_key + "," +timeTransform(Long.valueOf(start_time)) + "," + timeTransform(Long.valueOf(end_time))));
         map.clear();
     }
 }

@@ -56,7 +56,7 @@ public class DBscanJob extends Configured implements Tool {
         job.setOutputKeyClass(NullWritable.class);
         job.setOutputValueClass(Text.class);
 
-        job.setNumReduceTasks(1);
+        job.setNumReduceTasks(6);
 
         return job.waitForCompletion(true)?0:1;
     }

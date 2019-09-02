@@ -6,6 +6,7 @@ import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.NullWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
@@ -27,8 +28,8 @@ public class OnedayJob extends Configured implements Tool  {
 //        conf.set("intdouble_path",args[0]);
         Job job = Job.getInstance(conf,"OnedayJob");
 
-        job.setJarByClass(OnedayJob.class);
-//        job.setJar("/Users/apple/Desktop/dianxin_signal_dataanalysis_project/target/dianxin_signal_dataanalysis_project-1.0-SNAPSHOT.jar");
+//        job.setJarByClass(OnedayJob.class);
+        job.setJar("/Users/apple/Desktop/dianxin_signal_dataanalysis_project/target/dianxin_signal_dataanalysis_project-1.0-SNAPSHOT.jar");
         job.setInputFormatClass(TextInputFormat.class);
 
         for(int i=0 ; i<args.length-1;i++){
@@ -45,14 +46,14 @@ public class OnedayJob extends Configured implements Tool  {
 //        job.setReducerClass(regularReducer.class);
 
         //设置mapper输出类型
-        job.setMapOutputKeyClass(IntWritable.class);
+        job.setMapOutputKeyClass(NullWritable.class);
         job.setMapOutputValueClass(Text.class);
 
         //设置reducer输出类型
 //        job.setOutputKeyClass(NullWritable.class);
 //        job.setOutputValueClass(Text.class);
 
-        job.setNumReduceTasks(2);
+        job.setNumReduceTasks(6);
 
         return job.waitForCompletion(true)?0:1;
     }
